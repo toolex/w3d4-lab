@@ -4,7 +4,10 @@ require_relative("models/casting")
 
 require("pry")
 
-# delete_all
+Casting.delete_all
+Movie.delete_all
+Star.delete_all
+
 
 
 movie1 = Movie.new({ 'title' => 'John Wick', 'genre' => 'Action'})
