@@ -9,9 +9,9 @@ class Casting
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
-    @movie_id = options['movie_id']
-    @star_id = options['star_id']
-    @fee = options['fee'].to_i
+    @movie_id = options['movie_id'].to_i
+    @star_id = options['star_id'].to_i
+    @fee = options['fee']
   end
 
   def save()
@@ -21,9 +21,11 @@ class Casting
       star_id,
       fee
     )
-    VALUES (
+    VALUES
+    (
       $1, $2, $3
-      ) RETURNING id"
+    )
+    RETURNING id;"
     values = [@movie_id, @star_id, @fee]
     casting = SqlRunner.run(sql, values).first
     @id = casting['id'].to_i()
